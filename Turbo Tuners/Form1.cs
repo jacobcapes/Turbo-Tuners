@@ -7,23 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace Turbo_Tuners
 {
     public partial class Form1 : Form
     {
+       
+        int score = 0; 
         Graphics g; //declare a graphics object called g so we can draw on the Form
+        Random rand = new Random();
+        int count = 20;
         Car car = new Car(); //create an instance of the Spaceship Class called spaceship
-        Checkpoint checkpoint = new Checkpoint();
         bool turnLeft, turnRight;
         int x1 = 20, y1 = 20;// starting position of planet
         bool up;
         string move;
-        Rectangle area;
+        Rectangle checkRec = new Rectangle(0, 0, 30, 30);
+        Image checkpointImage = Properties.Resources.car1;
         public Form1()
         {
             InitializeComponent();
-            area = new Rectangle(x1, y1, 30, 30);//spaceship's rectangle	
+            checkRec = new Rectangle(x1, y1, 30, 30);//spaceship's rectangle
+            typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true });
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -48,7 +54,7 @@ namespace Turbo_Tuners
                 car.Rotatecar(car.rotationAngle);
             }
             panel1.Invalidate();
-           
+            
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -65,13 +71,55 @@ namespace Turbo_Tuners
             if (e.KeyData == Keys.Up) { up = true; }
         }
 
+        private void tmrCheck_Tick(object sender, EventArgs e)
+        {
+            
+            lblScore.Text = score.ToString();//display score on the form 
+            
+            if (checkRec.IntersectsWith(car.carRec))
+            {
+             
+                score += 1;
+                count ++;
+                lblScore.Text = score.ToString();
+                checkRec.Y = rand.Next(240);
+                checkRec.X = rand.Next(240);
+            }
+            
+       
+
+       
+        }
+
+        private void lblScore_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tmrCountdown_Tick(object sender, EventArgs e)
+        {
+            count--;//decrease count by 1
+            LblTime.Text = count.ToString();//display count in LblTime
+
+            if (count == 0)
+            {
+
+                tmrCountdown.Stop();
+                
+    
+                MessageBox.Show("Game Over!");
+            }
+
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             //get the graphics used to paint on the Form control
             g = e.Graphics;
-            checkpoint.drawCheck(g);
+            g.DrawImage(checkpointImage, checkRec);
             //Draw the spaceship
             car.drawCar(g);
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)

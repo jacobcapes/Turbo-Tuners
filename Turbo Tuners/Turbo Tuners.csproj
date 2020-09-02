@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
-    <Compile Include="Checkpoint.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
