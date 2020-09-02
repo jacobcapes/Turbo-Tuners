@@ -84,5 +84,11 @@
   <ItemGroup>
     <None Include="Resources\toppng.com-onlinelabels-clip-art-race-car-top-down-clipart-1000x496.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fuel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fuel1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

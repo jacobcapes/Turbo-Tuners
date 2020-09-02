@@ -25,8 +25,8 @@ namespace Turbo_Tuners
         {
             x = 10;
             y = 360;
-            width = 20;
-            height = 30;
+            width = 30;
+            height = 45;
             rotationAngle = 0;
             car = Properties.Resources.car1;
             carRec = new Rectangle(x, y, width, height);
@@ -60,17 +60,17 @@ namespace Turbo_Tuners
                 y = 385;
                 // spaceRec.Location = new Point(x, y);
             }
-            if (carRec.Location.X > 430) // is spaceship within 10 of left side
+            if (carRec.Location.X > 700) // is spaceship within 10 of left side
             {
 
-                x = 430;
+                x = 700;
                 // spaceRec.Location = new Point(x, y);
             }
             if (carRec.Location.X < 10) // is spaceship within 10 of left side
             {
 
                 x = 10;
-                // spaceRec.Location = new Point(x, y);
+                //spaceRec.Location = new Point(x, y);
             }
             x += (int)xSpeed;//cast double to an integer value
             y -= (int)ySpeed;

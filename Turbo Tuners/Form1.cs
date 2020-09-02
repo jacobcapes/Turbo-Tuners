@@ -24,7 +24,7 @@ namespace Turbo_Tuners
         bool up;
         string move;
         Rectangle checkRec = new Rectangle(0, 0, 30, 30);
-        Image checkpointImage = Properties.Resources.car1;
+        Image checkpointImage = Properties.Resources.fuel1;
         public Form1()
         {
             InitializeComponent();
@@ -54,7 +54,24 @@ namespace Turbo_Tuners
                 car.Rotatecar(car.rotationAngle);
             }
             panel1.Invalidate();
-            
+            if (score == 5)
+            {
+                tmrCountdown.Interval = 800;
+
+            }
+            if (score == 10)
+            {
+                tmrCountdown.Interval = 600;
+            }
+            if (score == 10)
+            {
+                tmrCountdown.Interval = 400;
+            }
+
+
+
+
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -112,6 +129,22 @@ namespace Turbo_Tuners
 
         }
 
+        private void startToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            txtName.Enabled = false;
+            score = 0;
+            lblScore.Text = score.ToString();
+            count = int.Parse(LblTime.Text);// pass lives entered from textbox to lives variable
+            tmrCar.Enabled = true;
+            tmrCountdown.Enabled = true;
+            tmrCheck.Enabled = true;
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             //get the graphics used to paint on the Form control
@@ -125,6 +158,8 @@ namespace Turbo_Tuners
         private void Form1_Load(object sender, EventArgs e)
         {
 
+            MessageBox.Show("Use the left, right and up arrow keys to move and rotate the car. \n Make sure to collect as much fuel as possible before the time run out\n Every fuel collected slows down the timer\n Enter you name and click Start to begin", "Game Instructions");
+            txtName.Focus();
         }
     }
 }
