@@ -60,10 +60,10 @@ namespace Turbo_Tuners
                 y = 385;
                 // spaceRec.Location = new Point(x, y);
             }
-            if (carRec.Location.X > 700) // is spaceship within 10 of left side
+            if (carRec.Location.X > 647) // is spaceship within 10 of left side
             {
 
-                x = 700;
+                x = 647;
                 // spaceRec.Location = new Point(x, y);
             }
             if (carRec.Location.X < 10) // is spaceship within 10 of left side

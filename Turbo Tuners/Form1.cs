@@ -99,8 +99,8 @@ namespace Turbo_Tuners
                 score += 1;
                 count ++;
                 lblScore.Text = score.ToString();
-                checkRec.Y = rand.Next(240);
-                checkRec.X = rand.Next(240);
+                checkRec.Y = rand.Next(394);
+                checkRec.X = rand.Next(657);
             }
             
        
@@ -122,8 +122,10 @@ namespace Turbo_Tuners
             {
 
                 tmrCountdown.Stop();
-                
-    
+                tmrCar.Enabled = false;
+               
+                tmrCheck.Enabled = false;
+
                 MessageBox.Show("Game Over!");
             }
 
@@ -131,10 +133,12 @@ namespace Turbo_Tuners
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            tmrCountdown.Interval = 1000;
             txtName.Enabled = false;
             score = 0;
             lblScore.Text = score.ToString();
             count = int.Parse(LblTime.Text);// pass lives entered from textbox to lives variable
+            count = 20;
             tmrCar.Enabled = true;
             tmrCountdown.Enabled = true;
             tmrCheck.Enabled = true;
@@ -142,7 +146,38 @@ namespace Turbo_Tuners
 
         private void txtName_TextChanged(object sender, EventArgs e)
         {
+            string context = txtName.Text;
+            bool isletter = true;
+            //for loop checks for letters as characters are entered
+            for (int i = 0; i < context.Length; i++)
+            {
+                if (!char.IsLetter(context[i]))//if current character not a letter
+                {
+                    isletter = false;//make isletter false
+                    break; // exit the for loop
+                }
+            }
+            //if not a letter clear the textbox and focus on it
+            // to enter name again
+            if (isletter == false)
+            {
+                txtName.Clear();
+                txtName.Focus();
+            }
+            else
+            {
+                MnuStart.Enabled = true;
+            }
+        }
 
+        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tmrCountdown.Interval = 1000;
+            txtName.Enabled = false;
+         
+            tmrCar.Enabled =false;
+            tmrCountdown.Enabled =false;
+            tmrCheck.Enabled = false;
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -160,6 +195,7 @@ namespace Turbo_Tuners
 
             MessageBox.Show("Use the left, right and up arrow keys to move and rotate the car. \n Make sure to collect as much fuel as possible before the time run out\n Every fuel collected slows down the timer\n Enter you name and click Start to begin", "Game Instructions");
             txtName.Focus();
+            MnuStart.Enabled = false;
         }
     }
 }
