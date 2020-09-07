@@ -27,6 +27,7 @@ namespace Turbo_Tuners
         Image checkpointImage = Properties.Resources.fuel1;
         public Form1()
         {
+         //draws checkpoint and stops panel from flickering
             InitializeComponent();
             checkRec = new Rectangle(x1, y1, 30, 30);//spaceship's rectangle
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true });
@@ -39,6 +40,7 @@ namespace Turbo_Tuners
 
         private void tmrCar_Tick(object sender, EventArgs e)
         {
+            //timer for car controls movement and "levels" where game difficulty increases as more points are accumulated
             if (turnRight)
             {
                 car.rotationAngle += 5;
@@ -47,13 +49,13 @@ namespace Turbo_Tuners
             {
                 car.rotationAngle -= 5;
             }
-            if (up) // if left arrow key pressed
+            if (up) 
             {
                 move = "up";
                 car.MoveCar(move);
                 car.Rotatecar(car.rotationAngle);
             }
-            panel1.Invalidate();
+            panel1.Invalidate(); //fires the paint event to redraw panel
             if (score == 5)
             {
                 tmrCountdown.Interval = 800;
@@ -76,6 +78,7 @@ namespace Turbo_Tuners
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
+            //events to happen if key pressed
             if (e.KeyData == Keys.Left) { turnLeft = false; }
             if (e.KeyData == Keys.Right) { turnRight = false; }
             if (e.KeyData == Keys.Up) { up = false; }
@@ -83,6 +86,7 @@ namespace Turbo_Tuners
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            //Key down events
             if (e.KeyData == Keys.Left) { turnLeft = true; }
             if (e.KeyData == Keys.Right) { turnRight = true; }
             if (e.KeyData == Keys.Up) { up = true; }
@@ -90,7 +94,7 @@ namespace Turbo_Tuners
 
         private void tmrCheck_Tick(object sender, EventArgs e)
         {
-            
+            //this timer is connect3ede to the checkpint/fuelcan and is constantly checking to see if the car has intersected with it
             lblScore.Text = score.ToString();//display score on the form 
             
             if (checkRec.IntersectsWith(car.carRec))
@@ -133,12 +137,13 @@ namespace Turbo_Tuners
 
         private void startToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //begins game with correct variables selected
             tmrCountdown.Interval = 1000;
             txtName.Enabled = false;
             score = 0;
             lblScore.Text = score.ToString();
             count = int.Parse(LblTime.Text);// pass lives entered from textbox to lives variable
-            count = 20;
+            count = 20; //starter variable is 20
             tmrCar.Enabled = true;
             tmrCountdown.Enabled = true;
             tmrCheck.Enabled = true;
@@ -172,9 +177,9 @@ namespace Turbo_Tuners
 
         private void stopToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //timers disabled and everything reset
             tmrCountdown.Interval = 1000;
             txtName.Enabled = false;
-         
             tmrCar.Enabled =false;
             tmrCountdown.Enabled =false;
             tmrCheck.Enabled = false;
