@@ -18,9 +18,9 @@ namespace Turbo_Tuners
         Graphics g; //declare a graphics object called g so we can draw on the Form
         Random rand = new Random();
         int count = 20;
-        Car car = new Car(); //create an instance of the Spaceship Class called spaceship
+        Car car = new Car(); //create an instance of the Car Class called car
         bool turnLeft, turnRight;
-        int x1 = 20, y1 = 20;// starting position of planet
+        int x1 = 20, y1 = 20;// starting position of car
         bool up;
         string move;
         Rectangle checkRec = new Rectangle(0, 0, 30, 30);
@@ -29,7 +29,7 @@ namespace Turbo_Tuners
         {
          //draws checkpoint and stops panel from flickering
             InitializeComponent();
-            checkRec = new Rectangle(x1, y1, 30, 30);//spaceship's rectangle
+            checkRec = new Rectangle(x1, y1, 30, 30);//checkpoints's rectangle
             typeof(Panel).InvokeMember("DoubleBuffered", BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.NonPublic, null, panel1, new object[] { true });
         }
 
@@ -190,7 +190,7 @@ namespace Turbo_Tuners
             //get the graphics used to paint on the Form control
             g = e.Graphics;
             g.DrawImage(checkpointImage, checkRec);
-            //Draw the spaceship
+            //Draw the car
             car.drawCar(g);
            
         }
